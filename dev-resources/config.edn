@@ -1,0 +1,3 @@
+{:datomic {:uri "datomic:mem://cmess"}
+ :http {:port 8080
+        :static-resources-path "public"}}

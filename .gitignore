@@ -1,0 +1,43 @@
+# Intellij project files
+*.iml
+*.ipr
+*.iws
+.idea
+
+# Eclipse project folders
+.classpath
+.project
+.settings
+
+# Netbeans project helpers
+nb-configuration.xml
+
+# Maven output folder
+target
+
+# Gradle output folder
+.gradle
+build
+
+#lein
+.nrepl-port
+figwheel_server.log
+
+# Binary files
+*.exe
+*.dll
+*.so*
+*.dll
+*.class
+*.jar
+*.war
+
+# OSX finder metadata
+.DS_Store
+
+# Node/Npm
+node_modules
+npm-debug.log
+
+# project
+resources/public/js

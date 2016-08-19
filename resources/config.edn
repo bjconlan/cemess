@@ -1,0 +1,2 @@
+{:datomic {:uri "datomic:mem://cmess"}
+ :http {:port 80}}
