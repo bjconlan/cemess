@@ -1,12 +1,10 @@
-(ns cmess.core
+(ns cemess.core
   (:require [com.stuartsierra.component :as component]
             [clojure.tools.logging :as log]
             [datomic.api :as d]
             [ring.adapter.jetty :as jetty]
             [ring.middleware.resource :refer [wrap-resource]]
-            [cmess.server.middleware :as middleware]
-            [cmess.server.parser :as parser]
-            [om.next.server :as om]))
+            [cemess.server.middleware :as middleware]))
 
 (defrecord DatomicConnection [options]
   component/Lifecycle
@@ -31,7 +29,6 @@
       (assoc this :instance (jetty/run-jetty
                               (-> (fn [req] (handler (assoc req :datomic-connection (:instance datomic-connection))))
                                   (wrap-resource (:static-resources-path options))
-                                  ;(middleware/wrap-transit-body)
                                   (middleware/wrap-transit-response)
                                   (middleware/wrap-transit-params))
                               (assoc options :join? false)))))
@@ -44,13 +41,14 @@
 (defn context [{:keys [datomic http]}]
   (component/system-map
     :datomic-connection (map->DatomicConnection {:options datomic})
-    :handler (fn [req]
-               (let [data ((om/parser {:read parser/read :mutate parser/mutate})
-                            {:conn (:datomic-connection req)} (:transit-params req))]
-                 {:status  200
-                  :headers {"Content-Type" "application/transit+json"}
-                  :body    data}))
-    :http-server (component/using (map->HttpServer {:options http}) [:handler :datomic-connection])))
+    ;; KISS, simple query binding to page response built on the client using a streaming builders (focus on client
+    ;; first). I have a feeling maybe just using the datomic rest api might be enough here for the moment.
+    :handler (fn [_]
+               {:status  200
+                :headers {"Content-Type" "application/transit+json"}
+                :body    nil})
+    :http-server (component/using (map->HttpServer {:options http})
+                                  [:handler :datomic-connection])))
 
 (def system (context (clojure.edn/read-string (slurp (clojure.java.io/resource "config.edn")))))
 (alter-var-root #'system component/start)

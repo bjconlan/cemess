@@ -1,4 +1,4 @@
-(ns cmess.server.middleware
+(ns cemess.server.middleware
   (:require [ring.util.response :refer :all]
             [cognitect.transit :as transit])
   (:import [java.io ByteArrayOutputStream]))

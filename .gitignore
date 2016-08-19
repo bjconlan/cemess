@@ -21,6 +21,7 @@ build
 
 #lein
 .nrepl-port
+.lein-repl-history
 figwheel_server.log
 
 # Binary files
