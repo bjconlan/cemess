@@ -1,4 +1,4 @@
-(ns cemess.core
+(ns cemess.server.core
   (:require [com.stuartsierra.component :as component]
             [clojure.tools.logging :as log]
             [datomic.api :as d]

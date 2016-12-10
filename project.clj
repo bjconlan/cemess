@@ -3,6 +3,7 @@
   :dependencies [[org.clojure/clojure "1.9.0-alpha14"]
                  [org.clojure/clojurescript "1.9.293"]
                  [com.datomic/datomic-free "0.9.5544" :exclusions [org.slf4j/*]]
+                 [datascript "0.15.5"]
                  [com.cognitect/transit-clj "0.8.297"]
                  [com.cognitect/transit-cljs "0.8.239"]
                  [com.stuartsierra/component "0.3.1"]
@@ -16,16 +17,14 @@
   :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
   :clean-targets [:target-path "out"]
   :cljsbuild {:builds [{:id           "dev"
-                        :source-paths ["src"]
+                        :source-paths ["src/cemess/client"]
                         :figwheel     true
                         :compiler     {:main       "cemess.client.core"
                                        :asset-path "js/out"
                                        :output-dir "resources/public/js/out"
-                                       :output-to  "resources/public/js/main.js"
-                                       ;:source-map true
-                                       }}
+                                       :output-to  "resources/public/js/main.js"}}
                        {:id           "prod"
-                        :source-paths ["src"]
+                        :source-paths ["src/cemess/client"]
                         :compiler     {:optimizations :advanced
                                        :pretty-print  false
                                        :main       "cemess.client.core"
