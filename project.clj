@@ -1,17 +1,19 @@
 (defproject cemess "0.0.1-SNAPSHOT"
   :jvm-opts ^:replace ["-Xms512m" "-Xmx512m" "-server"]
-  :dependencies [[org.clojure/clojure "1.9.0-alpha10"]
-                 [org.clojure/clojurescript "1.9.216"]
-                 [com.datomic/datomic-free "0.9.5394" :exclusions [org.slf4j/*]]
-                 [com.cognitect/transit-clj "0.8.288"]
+  :dependencies [[org.clojure/clojure "1.9.0-alpha14"]
+                 [org.clojure/clojurescript "1.9.293"]
+                 [com.datomic/datomic-free "0.9.5544" :exclusions [org.slf4j/*]]
+                 [com.cognitect/transit-clj "0.8.297"]
                  [com.cognitect/transit-cljs "0.8.239"]
                  [com.stuartsierra/component "0.3.1"]
-                 [ring/ring-core "1.6.0-beta5"]
-                 [ring/ring-jetty-adapter "1.6.0-beta5"]
-                 [ch.qos.logback/logback-classic "1.1.7"]
+                 [ring/ring-core "1.6.0-beta6"]
+                 [ring/ring-jetty-adapter "1.6.0-beta6"]
+                 [ch.qos.logback/logback-classic "1.1.8"]
                  [org.clojure/tools.logging "0.3.1"]]
-  :profiles {:dev {:plugins [[lein-cljsbuild "1.1.3"]]
-                   :dependencies [[figwheel-sidecar "0.5.4-7"]]}}
+  :profiles {:dev {:plugins [[lein-cljsbuild "1.1.5"]]
+                   :dependencies [[com.cemerick/piggieback "0.2.1"]
+                                  [figwheel-sidecar "0.5.8"]]}}
+  :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
   :clean-targets [:target-path "out"]
   :cljsbuild {:builds [{:id           "dev"
                         :source-paths ["src"]
