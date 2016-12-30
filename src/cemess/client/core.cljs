@@ -35,6 +35,13 @@
 
 (dom/append js/document.body (createNode (d/entity @conn [:element/id "test"])))
 
+;(slider of first transaction/date -> last tx date)
+;(slider tags)
+;(multiple dbs (per... dimension?)
+
+;(prn conn)
+#_ (if showscrub
+     (entity get history ()))
 #_(defrecord App [options dom-conn data-conn]
   component/Lifecycle
   (start [this]
