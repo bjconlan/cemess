@@ -51,6 +51,7 @@
                                   [:handler :datomic-connection])))
 
 (def system (context (clojure.edn/read-string (slurp (clojure.java.io/resource "config.edn")))))
+
 (alter-var-root #'system component/start)
 
 (doall (->> ["dev-resources/schema.edn" "dev-resources/seed.edn"]
